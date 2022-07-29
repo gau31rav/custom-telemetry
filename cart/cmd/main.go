@@ -65,7 +65,7 @@ func addHandler(w http.ResponseWriter, req *http.Request) {
 	span.AddEvent("handling this...", trace.WithAttributes(uk.String(bag.Member("add item").Value())))
 	err := json.NewDecoder(req.Body).Decode(&item)
 	_ = err
-	_ = cartSVC.AddItems(item)
+	_ = cartSVC.AddItems(ctx, item)
 	_, _ = io.WriteString(w, "Item Added Successfully")
 }
 
